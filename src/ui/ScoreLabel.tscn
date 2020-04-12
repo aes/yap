@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/ui/ScoreLabel.gd" type="Script" id=1]
+
+[node name="ScoreLabel" type="Label"]
+margin_left = -40.0
+margin_bottom = 14.0
+text = "Score: 0"
+script = ExtResource( 1 )
