@@ -4,7 +4,9 @@ export var label_format: String = "Score: %d"
 
 
 func _ready() -> void:
-	GlobalGameState.connect("score_updated", self, "score_updated")
+	var err = GlobalGameState.connect("score_updated", self, "score_updated")
+	if err != OK:
+		print("Error connecting to score_updated: ", err)
 
 
 func score_updated(score: int) -> void:
