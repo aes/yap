@@ -34,17 +34,19 @@ func can_jump() -> bool:
 	)
 
 func _land() -> void:
-	$StompTimer.start()
-	$Sprite.frame = 1
+	$AnimationPlayer.play("land")
 	$AudioCrash.play()
+
+func _jump() -> void:
+	$CoyoteTime.stop()
+	$AnimationPlayer.play("jump")
 
 
 func get_direction() -> Vector2:
 	var jump = Input.is_action_just_pressed("jump") and can_jump()
 
-	if jump and coyote_time > 0:
-		$CoyoteTime.stop()
-		$Sprite.frame = 2
+	if jump:
+		_jump()
 
 	return Vector2(
 		Input.get_action_strength("move_right") -
@@ -66,7 +68,3 @@ func calculate_move_velocity(
 		out.y = speed.y * dir.y
 
 	return out
-
-
-func _on_stomp_timeout() -> void:
-	$Sprite.frame = 0

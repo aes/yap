@@ -28,5 +28,14 @@ target_portal = "Portal"
 [node name="Player" parent="." instance=ExtResource( 1 )]
 coyote_time = 0.5
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+process_mode = 0
+limit_left = 0
+limit_smoothed = true
+smoothing_speed = 15.0
+offset_v = -1.0
+drag_margin_bottom = 0.5
+
 [node name="Ghost" parent="." instance=ExtResource( 5 )]
 position = Vector2( 256, 736 )
