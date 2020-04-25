@@ -71,7 +71,7 @@ margin_right = 83.0
 margin_bottom = 37.0
 shortcut = SubResource( 2 )
 text = "Start!"
-target_scene = "res://src/ui/GameDummy.tscn"
+target_scene = "res://src/levels/LevelTemplate.tscn"
 
 [node name="ButtonQuit" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 41.0
