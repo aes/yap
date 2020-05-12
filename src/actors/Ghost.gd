@@ -6,8 +6,11 @@ var mirrored: = false
 
 func _ready() -> void:
 	original = get_node_or_null("../Player")
+	$AnimationPlayer2.play("ghost_in")
+	$AudioCrash.volume_db = -20
 
-func _land() -> void:
+
+func _interact() -> void:
 	pass
 
 func get_direction() -> Vector2:

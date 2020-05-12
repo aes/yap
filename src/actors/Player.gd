@@ -25,6 +25,9 @@ func _physics_process(_delta: float) -> void:
 
 	was_in_air = !is_on_floor()
 
+	if Input.is_action_just_pressed("interact"):
+		_interact()
+
 
 func can_jump() -> bool:
 	return (
@@ -40,6 +43,14 @@ func _land() -> void:
 func _jump() -> void:
 	$CoyoteTime.stop()
 	$AnimationPlayer.play("jump")
+
+func _interact() -> void:
+	var ball: = load("res://src/objects/GhostBall.tscn")
+	var inst: Ball = ball.instance()
+	inst.global_position = global_position + Vector2(32, -32)
+	inst.linear_velocity = Vector2(300.0, -500.0)
+	inst.add_central_force(Vector2(0.0, 981.0))
+	get_parent().add_child(inst)
 
 
 func get_direction() -> Vector2:
