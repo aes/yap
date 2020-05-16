@@ -3,6 +3,8 @@ class_name Player
 
 export var coyote_time: float = 0.0
 
+onready var ball: PackedScene = preload("res://src/objects/GhostBall.tscn")
+
 var direction: Vector2 = Vector2.ZERO
 var was_in_air = false
 
@@ -45,7 +47,6 @@ func _jump() -> void:
 	$AnimationPlayer.play("jump")
 
 func _interact() -> void:
-	var ball: = load("res://src/objects/GhostBall.tscn")
 	var inst: Ball = ball.instance()
 	inst.global_position = global_position + Vector2(32, -32)
 	inst.linear_velocity = Vector2(300.0, -500.0)
