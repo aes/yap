@@ -18,7 +18,7 @@ func _physics_process(_delta: float) -> void:
 	_velocity = move_and_slide_with_snap(
 		_velocity, snap, FLOOR_NORMAL, true
 	)
-	
+
 	if was_in_air and is_on_floor():
 		_land()
 
@@ -29,6 +29,8 @@ func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("interact"):
 		_interact()
+
+	_face_direction()
 
 
 func can_jump() -> bool:
@@ -53,6 +55,9 @@ func _interact() -> void:
 	inst.add_central_force(Vector2(0.0, 981.0))
 	get_parent().add_child(inst)
 
+func _face_direction() -> void:
+	if direction.x != 0:
+		$Face.scale.x = sign(direction.x)
 
 func get_direction() -> Vector2:
 	var jump = Input.is_action_just_pressed("jump") and can_jump()
