@@ -6,6 +6,7 @@ export var coyote_time: float = 0.0
 onready var ball: PackedScene = preload("res://src/objects/GhostBall.tscn")
 
 var direction: Vector2 = Vector2.ZERO
+var face_dir setget _set_face_dir, _get_face_dir
 var was_in_air = false
 
 func _physics_process(_delta: float) -> void:
@@ -35,8 +36,7 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		_interact()
 
-	_face_direction()
-
+	self.face_dir = direction.x
 
 func can_jump() -> bool:
 	return (
@@ -60,9 +60,13 @@ func _interact() -> void:
 	inst.add_central_force(Vector2(0.0, 981.0))
 	get_parent().add_child(inst)
 
-func _face_direction() -> void:
-	if direction.x != 0:
-		$Face.scale.x = sign(direction.x)
+func _set_face_dir(x: float) -> void:
+	if x != 0:
+		$Face.scale.x = sign(x)
+
+func _get_face_dir() -> float:
+	return sign($Face.scale.x)
+
 
 func get_direction() -> Vector2:
 	return Vector2(
