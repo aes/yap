@@ -11,6 +11,11 @@ var was_in_air = false
 func _physics_process(_delta: float) -> void:
 	direction = get_direction()
 
+	if direction.y < 0 and can_jump():
+		_jump()
+	else:
+		direction.y = 0
+
 	var snap: = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
 
 	_velocity = calculate_move_velocity(_velocity, direction, speed)
@@ -60,15 +65,10 @@ func _face_direction() -> void:
 		$Face.scale.x = sign(direction.x)
 
 func get_direction() -> Vector2:
-	var jump = Input.is_action_just_pressed("jump") and can_jump()
-
-	if jump:
-		_jump()
-
 	return Vector2(
 		Input.get_action_strength("move_right") -
 		Input.get_action_strength("move_left"),
-		-1.0 if jump else 0.0
+		-1.0 if Input.is_action_just_pressed("jump") else 0.0
 	)
 
 
