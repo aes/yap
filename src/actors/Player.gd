@@ -19,7 +19,10 @@ func _physics_process(_delta: float) -> void:
 
 	var snap: = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
 
-	_velocity = calculate_move_velocity(_velocity, direction, speed)
+	_velocity = Vector2(
+		speed.x * direction.x,
+		speed.y * direction.y if direction.y != 0 else _velocity.y
+	)
 
 	_velocity = move_and_slide_with_snap(
 		_velocity, snap, FLOOR_NORMAL, true
@@ -67,25 +70,9 @@ func _set_face_dir(x: float) -> void:
 func _get_face_dir() -> float:
 	return sign($Face.scale.x)
 
-
 func get_direction() -> Vector2:
 	return Vector2(
 		Input.get_action_strength("move_right") -
 		Input.get_action_strength("move_left"),
 		-1.0 if Input.is_action_just_pressed("jump") else 0.0
 	)
-
-
-func calculate_move_velocity(
-		velocity: Vector2,
-		dir: Vector2,
-		speed: Vector2
-) -> Vector2:
-	var out: = velocity
-
-	out.x = speed.x * dir.x
-
-	if dir.y != 0.0:
-		out.y = speed.y * dir.y
-
-	return out
