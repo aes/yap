@@ -12,16 +12,16 @@ var was_in_air = false
 func _physics_process(_delta: float) -> void:
 	direction = get_direction()
 
-	if direction.y < 0 and can_jump():
-		_jump()
-	else:
-		direction.y = 0
+	var jumping = direction.y < 0 and can_jump()
 
-	var snap: = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
+	if jumping:
+		_jump()
+
+	var snap: = Vector2.DOWN * 60.0 if not jumping else Vector2.ZERO
 
 	_velocity = Vector2(
 		speed.x * direction.x,
-		speed.y * direction.y if direction.y != 0 else _velocity.y
+		speed.y * direction.y if jumping else _velocity.y
 	)
 
 	_velocity = move_and_slide_with_snap(
