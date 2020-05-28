@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ Color( 3, 3, 3, 1 ), Color( 0.670588, 0.941176, 1, 0.439216 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
+tracks/1/path = NodePath("Face:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -35,7 +35,7 @@ tracks/1/keys = {
 modulate = Color( 3, 3, 3, 1 )
 script = ExtResource( 2 )
 
-[node name="Sprite" parent="." index="0"]
+[node name="Face" parent="." index="1"]
 frame = 0
 
 [node name="LifetimeTimer" type="Timer" parent="." index="5"]
