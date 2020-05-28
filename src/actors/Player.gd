@@ -51,6 +51,8 @@ func can_jump() -> bool:
 func _land() -> void:
 	$AnimationPlayer.play("land")
 	$AudioCrash.play()
+	$DustRight.restart()
+	$DustLeft.restart()
 
 func _jump() -> void:
 	$CoyoteTime.stop()
